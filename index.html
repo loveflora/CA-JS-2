@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JS</title>
+  </head>
+  <body>
+    <button id="버튼">버튼</button>
+    <script>
+      // "use strict";
+
+      // console.log(this);
+      // // x = 300;
+      // // console.log(x);
+
+      // const 객체1 = {
+      //   data: "kim",
+      //   객체2: {
+      //     함수2: () => {
+      //       console.log(this);
+      //     },
+      //   },
+      // };
+
+      // 객체1.객체2.함수2();
+      // console.log(객체1.객체2);
+
+      //       const 객체 = {
+      //   data : "kim",
+      //   함수1 : {
+      //     함수2 : fucntion() {
+      //       console.log("this")  // 나를 포함하고 있는 '객체' ~~~~
+      //     }
+      //   }
+      // }
+
+      const 변수 = {};
+
+      function 기계() {
+        this.이름 = "kim";
+        // this : 새로 생성되는 object (instance)
+      }
+
+      const 객체 = new 기계();
+      // 기계로부터 새로 생성되는 '객체'에 object 복사해서 만듦 -- this랑 똑같은 key : value 값 할당되는거임
+      // (this object에 -- 이름 key : "kim" value -- 할당)
+      console.log(객체);
+      // 기계 {이름: "kim"}
+
+      // document.getElementById("버튼").addEventListener("click", function (e) {
+      //   this;
+      //   var arr = [1, 2, 3];
+      //   arr.forEach(function (a) {
+      //     console.log(a); // 1 2 3
+      //     console.log(this); // window 출력됨 (일반함수에 사용되어서) -- 함수는 어디에 달라 붙어서 쓰인게 아니므로 -- 전역함수 (부모 object == window)
+      //   });
+      // });
+
+      // < object 내에서 콜백함수 쓴다면 this는 ? >
+      // const 객체a = {
+      //   이름들: ["김", "이", "박"],
+      //   함수: function () {
+      //     console.log(this); // 객체a 나옴 --- 이 함수를 소유한 객체
+      //     객체a.이름들.forEach(function () {
+      //       console.log(this); // window 3번 출력됨  --- 근본 없는 일반함수이기 때문에.... (object내 함수 -- 메소드 아님 !!!)
+      //     });
+      //   },
+      // };
+
+      // 객체a.함수();
+
+      const 객체a = {
+        이름들: ["김", "이", "박"],
+        함수: function () {
+          console.log(this); // 객체a 나옴 --- 이 함수를 소유한 객체
+          객체a.이름들.forEach(() => {
+            console.log(this); // 객체a 3번 출력됨
+            // arrow function : 바깥에 있던 this를 그대로 가져다 씀 ==> 내부의 this 값 변화시키지 않음 (this값을 정해주지 않음. 외부 this 값 그대로 재사용 가능)
+          });
+        },
+      };
+
+      객체a.함수();
+    </script>
+  </body>
+</html>
